@@ -1,0 +1,2 @@
+- name: Looker Marketplace JSON Tests
+  uses: 4mile/looker-marketplace-json-js-tests@v1.0.1
