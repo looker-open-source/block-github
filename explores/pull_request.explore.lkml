@@ -5,6 +5,7 @@ include: "/views/requested_reviewer_history.view"
 include: "/views/pull_request_review.view"
 include: "/views/pull_request_review_dismissed.view"
 include: "/views/user.view"
+include: "/views/commit.view.lkml"
 
 explore: pull_request {
   join: issue {
@@ -54,6 +55,13 @@ explore: pull_request {
     from: repository
     type: left_outer
     sql_on: ${repository_head.id} = ${pull_request.head_repo_id} ;;
+    relationship: many_to_one
+  }
+  join: merge_commit {
+    view_label: "Merge commit"
+    from: commit
+    type: left_outer
+    sql_on ${pull_request.merge_commit_sha} = ${commit.sha} ;;
     relationship: many_to_one
   }
 
